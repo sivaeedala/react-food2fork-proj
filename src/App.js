@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Home from "./pages/Home";
+import Recipies from "./pages/Recipies";
+import SingleRecipie from "./pages/SingleRecipie";
+import Default from "./pages/Default";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Navbar from "./Component/Navbar";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  render() {
+    return (
+      <Router>
+        <main>
+          <Navbar></Navbar>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/recipies" exact component={Recipies}></Route>
+            <Route path="/recipies/:id" component={SingleRecipie}></Route>
+            <Route component={Default}></Route>
+          </Switch>
+        </main>
+      </Router>
+
+      // {/* <Home></Home>
+      // <Recipies></Recipies>
+      // <SingleRecipie></SingleRecipie>
+      // <Default></Default> */}
+    );
+  }
 }
-
-export default App;
