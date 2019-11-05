@@ -30,7 +30,7 @@ export default class Recipies extends Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         ></Search>
-        <RecipiesList recipie={this.state.recipieData}></RecipiesList>
+        <RecipiesList recipies={this.state.recipieData}></RecipiesList>
       </>
     );
   }

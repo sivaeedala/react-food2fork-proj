@@ -8,7 +8,7 @@ export default class Search extends Component {
         <div className="row">
           <div className="col-10 mx-auto col-md-8 mt-5 text-center">
             <h1 className="text-capitalize text-slanted">
-              Search Recipies with{" "}
+              Search Recipies with
               <strong className="text-orange">food2Fork</strong>
             </h1>
             <form className="mt-5">
