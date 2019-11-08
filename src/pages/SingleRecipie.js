@@ -17,7 +17,7 @@ export default class SingleRecipie extends Component {
   async componentDidMount() {
     console.log(process.env.REACT_APP_API_KEY);
     var url = `https://www.food2fork.com/api/get?key=${process.env.REACT_APP_API_KEY}&rId=${this.state.id}`;
-    var response = await fetch(url);
+    var response = await fetch(url).then();
     console.log(response);
     var responseData = await response.json();
     console.log(responseData);

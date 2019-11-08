@@ -4,6 +4,7 @@ import Recipie from "./Recipie";
 export default class RecipiesList extends Component {
   render() {
     const { recipies } = this.props;
+    console.log(this.props);
     return (
       <>
         <div className="container py-5">
@@ -19,10 +20,6 @@ export default class RecipiesList extends Component {
           </div>
         </div>
       </>
-      // <div>
-      //   Hello..! I am RecipiesList Component
-      //   <Recipie></Recipie>
-      // </div>
     );
   }
 }
