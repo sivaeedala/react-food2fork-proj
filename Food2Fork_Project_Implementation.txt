@@ -1,0 +1,285 @@
+Food2Fork Project:
+
+PreRequirements:
+----------------
+1. React Router : npm install --save react-router-dom
+2. BootStrap: npm install --save bootstrap
+2. Food2Fork API : https://www.food2fork.com/about/api
+3. Life Cycle Methods
+4. Asyc Await
+-> Project:
+1. Font Awesome:
+   - use CDN ref in Index.htmls
+2. Google Fonts 
+   - openSans & Courgette
+3. src/App.js
+	- delete logo
+	
+4. Copy Setup Files
+	- data & image folders in Scr folders
+5. Delete every thing in App.css & Index.css
+6. App.js
+   - import bootstrap 
+7. App.css
+	 .body: font-family with important flag
+	 .text-slanted:font-family -courgtte
+	 .text-orange:color
+	 .letter-spacing:letter-spacing-0.5rem
+8. Application Page Structure:
+   - Create Pages folder in Src
+   - creat following Home,Recipes,SingleRecipe,Default js files in Pages folder
+   - Add create class component in each of the above files
+   - Referance them in App.js4
+   
+9. React-Router-Setup:
+	-> In App.js import BrowserRouter as Router,Route,Switch from 'react-router-dom'
+	-> Creacting Router component in App.js
+		-> Add Router tags <Router></Router>
+		-> Add Main tag under Router
+		-> Add Switch statement inside the Main Tag
+		-> Add Route tag with below under Switch Statement.
+			<Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/recipies" exact component={Recipies}></Route>
+            <Route path="/recipies/:id" component={SingleRecipie}></Route>
+            <Route component={Default}></Route>
+          </Switch>
+10. Nav Bar Component:
+	-> Create Component Folder in src
+	-> Create navbar.js
+	-> Create functional component in navbar.js
+	   -> Import logo form '../image/logo.svg'
+	   ->import {link} from react-router-dom
+	   -> place navbar element  as below with Link
+	       <nav className="navbar navbar-expand-sm navbar-light bg-light">
+      <Link to="/" className="navbar navbar-brand">
+        <img src={logo} alt="logo" />
+      </Link>
+      <div className="collapse navbar-collapse show ml-sm-5">
+        <ul className="navbar-nav">
+          <li className="navbar-item">
+            <Link to="/" className="nav-link">
+              Home
+            </Link>
+          </li>
+          <li className="navbar-item">
+            <Link to="/recipies" className="nav-link">
+              Recipies
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+	- Import Navbar to App.js
+
+11. Header Component:
+	-> Create Header.js
+	-> Add functional component "Header" with below props
+		{children,title,styleClass}
+		title - Genral Tile
+		styleClass - Coustom Styling from Parent
+	
+	-> Add following JSX 
+	   - header
+	   - div class container-fluid
+		- div className={`row algin-item-center ${styleClass}`}
+			- div class col text-center
+				- dispaly title
+				- render prop {children}
+		- Add default props no props send from paren
+		Header.defaultProps={
+		title:'Default'
+		styleClass:header-hero
+		}
+	-> Add style for "header-hero" in App.css which is default style in Header component 
+	   - .header-hero{
+		 background:url('<path>')
+		 min-height:calc(100vh-56px)
+	   }
+	 -> Import Header component,Link from router-dom in Home.js
+	 -> In Home.js render Header component and Link as Childer in Header
+				
+12. Default Page Structure:
+13: Recipes Page Structure:
+	-> Create 3 Components Search,RecipesList,Recipe in Component Folder
+	-> Import Recipe to RecipesList
+	-> Import RecipesList & Search in /Pages/Recipes.js 
+	-> Import RecipiesData from Datafolder tempDetials in /Pages/Recipes.js
+	-> Add Constructor
+	-> Add State with Search='' and Recipes:RecipiesData 
+	-> Add 2 handle events handleChange & handleSubmit
+	-> Render Search Component with attribute/props as Search={this.state.Search},handleChange={this.handleChange}
+	-> Render RecipesList Component with prop Recipes={this.state.Recipe}
+14. Search Component
+	-> Add div with className Container
+		-> Add div with ClassName Row
+			-> Add div with className col-10 mx-auto col-md-8 mt-5 text-center'
+				-> Add h1 with className text-capitalize text-slanted
+				   - Search Recipes with <Strong className="text-orange">Food2Fork</>
+			    -> Add Form with class mt-4
+				   - div with className input-group
+					   - lable htmlfor="search className text-capitalize
+					   - input type text with className form-control name="search" value={this.props.search} onChange={handleChange} placeHolder=""
+					   - Add div with className input-group-append
+				         - button type=submit className=input-group-text bg-primary text-white onClick="handleSubmit"
+						   <i classNam =fas fa-search>
+15. Food2Fork Api
+16. RecipesList Component
+	-> Destructrue the Prop const{recipies}=this.props
+	-> add react fragment tags <></>
+	   -> Add div with classname Conatiner 
+	      -> Add div with class row
+		     -> Add div class col-10 mx-auto col-md-6 text-center mb-3 text-uppercase
+			    -> Add h1 tag with className text-slanted
+	      -> Add div with className row
+		     ->loop throuh each every receipe and Add Recipe component with receipe as props
+17. Recipe Component
+	-> Destructure the Props of Receipe
+	-> Add Col-10 mx-auto 
+	    col-md-6 - medium Screen 2 column layout
+		col-lg-4 - Large 4 Col layout
+		my-3 - margin top bottom 3
+		-> Add div with className=card style -height=100%
+		   -> img tag with src={image_url} style height:14rem className=img-card-top
+		   -> Add div with className="Card-body text-capitalize"
+		      -> h6 with {title}
+			  -> h6 className="text-warning text-slanted" {publisher}
+		   -> div with ClassName= card-footer
+		      <Link>
+			  <a href={source_url} tagreg="_blank" className="btn btn-Success">Recipe Url</a>
+18. Single Reciepie Page:
+    -> Import {recipieData} from './data/tempDetails'
+	-> Import {LinK} from 'react-router-dom'
+	-> With in the class component create Constructor(props) with 
+	    -> variable id={this.props.match.param.id}
+		-> Add State with properties receipe:recipieData, id, loading:false
+	-> In render method Destructure the recipieData from ./data/tempDetails
+	-> if(this.state.loading){
+		-> div: col-10 mx-auto(center) col-md-6 my-3 
+		   - row
+		     -col-10 mx-auto col-md-6 
+			   -> loading message
+	}
+	-> else{
+		-> Add div with className=constainer
+		-> div: row
+			 -> div: col-10 mx-auto(center) col-md-6 my-3 
+				-> <Link to="/receipe" className="btn btn-warning text-capitalize"> Back to RecipesList</Link>
+				-> <img src={image_url} className="d-block w-100" style={{maxHeight:30rem}} alt="">
+			 -> div: col-10 mx-auto(center) col-md-6 my-3
+			    -> h6 className="text-capitalize" - {title}
+				-> h6 className="text-warning text-capitalize text-slanted" - {publisher}
+				-> <a href={source_url} className=btn btn-primary mt-2 mx-2 text-capitalize> publisher
+				-> <LinK to="/receipe" className=btn btn-Success mt-2 mx-2 text-capitalize> Reciepie Url
+				-> ul className list-group
+				   -> h6 className="text-capitalize"  - Ingredients
+				   -> loop through ingredients
+				      -> {ingredients.map((item,index)=>{
+					      retrun(
+						  <li key={index} className="list-group-item text-slanted">{item}</>
+						  )
+					  })}
+	}
+	
+19. Single Reciepie Page with  Ajax:
+    -> Make State property receipe as empty i.e. {} 
+	-> Add life cycle method of class based component i.e. ComponentDidMount with following Code
+	  async ComponetDidMount(){
+		var url=`https://....../${id (declared in Constructor)}` // Dynamic url
+		var response =await Fetch(url);
+		var responseData=await response.json();
+		this.setState({
+		receipe:responseData.receipe;
+		loading:true;
+		})
+	   }
+20. Environment Variables : Used to ignore the Cofidential info to be ignored when commiting code to Git source_url
+   -> Create file with name .env.devlopment and add Api key of Food2Fork Api key. 
+      REACT_APP_API_KEY=""
+	  Always REACT_APP should be common.
+   -> Use environment variable in url of ajax call as 
+     {process.env.API_KEY}
+21. Get Reciepie List from Api: In Reciepies.js
+    -> Make state property recipies as empty
+	-> Add state property  url:"<Api Url>"/key={process.env.API_KEY}
+    -> Add async method getRecipies()	{
+		
+		var response =await Fetch({this.state.url});
+		var responseData=await response.json();
+		this.setState({
+		receipies:responseData.recipes;
+		
+		})
+	}
+   -> Add component life cycle and call getRecipies from it.
+	  async ComponentDidMount(){
+		  await this.getRecipies()
+	  }
+ 22. Implementing Search Functionality: In Reciepies.js
+     -> Add following state properties
+     	 base_url:"<Api Url>"/key={process.env.API_KEY}
+		 query: "&q=",
+		 error: "",
+	 -> In handleSubmit function add following         
+		 handleSubmit = e => {
+			e.preventDefault();
+			const { baseUrl, query, search } = this.state;
+			this.setState(
+			  {
+				url: `${baseUrl}${query}${search}`
+			  },
+			  () => this.getRecipies()
+			);
+		  };	
+		  
+	-> Modify getRecipies method as following
+		async getRecipies() {
+		console.log(this.state.url);
+		const response = await fetch(this.state.url);
+
+		const jsonData = await response.json();
+		if (jsonData.recipes.length == 0) {
+		  this.setState({
+			error: "No Search items Found"
+		  });
+		} else {
+		  this.setState({
+			recipies: jsonData.recipes,
+			error: ""
+		  });
+		}
+	  }
+	 -> Show error message when no search results. Add following in render method 
+	   {this.state.error ? (
+          <section>
+            <div className="row">
+              <div className="col">
+                <h2 className="text-center text-orange">{this.state.error}</h2>
+              </div>
+            </div>
+          </section>
+        ) : (
+          <RecipiesList recipies={this.state.recipies}></RecipiesList>
+        )}
+	 
+		  
+		  
+	
+	
+	
+		
+		
+	    
+	
+	 
+ 
+
+
+	
+
+   
+   
+   
+
+
+
